@@ -13,18 +13,19 @@
       <ul>
         <li v-for="(link, index) in links" :key="index">
           {{ link }}
+          <button class="rm" @click="removeLinks(index)">Remove</button>
         </li>
       </ul>
     </div>
     <div class="right">
-      <stats />
+      <statsWord />
     </div>
   </div>
 </template>
 
 <script>
-import stats from "../components/stats.vue";
-import { mapState, mapMutations } from "vuex";
+import statsWord from "./statsWord.vue";
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   name: "HelloWorld",
   data() {
@@ -32,13 +33,17 @@ export default {
       newlink: "",
     };
   },
-  components: { stats },
+  components: { statsWord },
   computed: mapState(["title", "links"]),
   methods: {
     ...mapMutations(["ADD_LINK"]),
+    ...mapActions(["removeLink"]),
     addlink: function () {
       this.ADD_LINK(this.newlink);
       this.newlink = "";
+    },
+    removeLinks: function (link) {
+      this.removeLink(link);
     },
   },
 };
@@ -91,5 +96,15 @@ input {
   box-shadow: 0 5px 5px lightgrey;
   margin-bottom: 50px;
   outline: none;
+}
+.rm {
+  float: right;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  background: #f9d0e3;
+  border: none;
+  padding: 5px;
+  color: #ff0076;
+  cursor: pointer;
 }
 </style>
