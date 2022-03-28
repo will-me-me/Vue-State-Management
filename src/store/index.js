@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    title: "A Vuex Tutorial by Willy - Learn Vue State Management",
+    title: "Vue State Management",
     links: ["http://google.com", "http://coursetro.com", "http://youtube.com"],
   },
   getters: {
